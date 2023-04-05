@@ -147,16 +147,10 @@ local function autocomet()
                 task.wait(0.1)  
             else
                 print('picking')
-                for i = 1,3 do
+                for i = 1,7 do
                     for K,O in pairs(Pets) do
                         Invoke('Join Coin', v36.CoinId, {O.uid})
                         Fire('Farm Coin', v36.CoinId, O.uid)
-                        for i,v in pairs(Workspace["__THINGS"].Orbs:GetChildren()) do
-                            v.CFrame = (game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame)
-                        end 
-                        for i,v in pairs(Workspace["__THINGS"].Lootbags:GetChildren()) do
-                            v.CFrame = (game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame)
-                        end
                     end 
                     for i,v in pairs(Workspace["__THINGS"].Orbs:GetChildren()) do
                         v.CFrame = (game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame)
@@ -164,10 +158,9 @@ local function autocomet()
                     for i,v in pairs(Workspace["__THINGS"].Lootbags:GetChildren()) do
                         v.CFrame = (game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame)
                     end
-                    task.wait(0.4)
+                    task.wait(0.5)
                     
                 end
-                task.wait(1)
                 return
             end
             --task.wait(1)
@@ -178,17 +171,15 @@ local function autocomet()
     end
 end
 if (tostring(game.Players.LocalPlayer) == 'hanimexjavmost') then
-    --[[_G.Key = '64JTZ-2VWDU-3JAB9-NLWSY'
-    if syn then request = syn.request end
-    loadstring(request({['Url']='https://raw.githubusercontent.com/x2Moodz/XenonV2/main/Loadder.lua',['Method']='GET'}).Body)()
-    ]]
+    print('kuy')
     return
 else
     while true do
         if pcall(autocomet) == false then
             print('cannt auto comet')
             task.wait(5)
-            teleportserver()
+            --teleportserver()
+            game:GetService("TeleportService"):Teleport(game.PlaceId, Player)
         end
     end
 end
