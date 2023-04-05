@@ -1,0 +1,194 @@
+task.wait()
+
+repeat wait() until game:GetService("ReplicatedStorage"):FindFirstChild("Library",true)
+local Network = require(game:GetService("ReplicatedStorage").Library.Client.Network);
+local Fire, Invoke = Network.Fire, Network.Invoke
+local old
+old = hookfunction(getupvalue(Fire, 1), function(...)
+   return true
+end)
+
+
+local function teleportserver()
+    local PlaceID = game.PlaceId
+    local AllIDs = {}
+    local foundAnything = ""
+    local actualHour = os.date("!*t").hour
+    local Deleted = false
+    local File = pcall(function()
+        AllIDs = game:GetService('HttpService'):JSONDecode(readfile("NotSameServers.json"))
+    end)
+    if not File then
+        table.insert(AllIDs, actualHour)
+        writefile("NotSameServers.json", game:GetService('HttpService'):JSONEncode(AllIDs))
+    end
+    function TPReturner()
+        local Site;
+        if foundAnything == "" then
+            Site = game.HttpService:JSONDecode(game:HttpGet('https://games.roblox.com/v1/games/' .. PlaceID .. '/servers/Public?sortOrder=Asc&limit=100'))
+        else
+            Site = game.HttpService:JSONDecode(game:HttpGet('https://games.roblox.com/v1/games/' .. PlaceID .. '/servers/Public?sortOrder=Asc&limit=100&cursor=' .. foundAnything))
+        end
+        local ID = ""
+        if Site.nextPageCursor and Site.nextPageCursor ~= "null" and Site.nextPageCursor ~= nil then
+            foundAnything = Site.nextPageCursor
+        end
+        local num = 0;
+        for i,v in pairs(Site.data) do
+            local Possible = true
+            ID = tostring(v.id)
+            print(v.id, v.playing)
+            if v.playing ~= nil then
+                if tonumber(v.maxPlayers) > tonumber(v.playing) then
+                    for _,Existing in pairs(AllIDs) do
+                        if num ~= 0 then
+                            if ID == tostring(Existing) then
+                                Possible = false
+                            end
+                        else
+                            if tonumber(actualHour) ~= tonumber(Existing) then
+                                local delFile = pcall(function()
+                                    delfile("NotSameServers.json")
+                                    AllIDs = {}
+                                    table.insert(AllIDs, actualHour)
+                                end)
+                            end
+                        end
+                        num = num + 1
+                    end
+                    if Possible == true then
+                        table.insert(AllIDs, ID)
+                        wait()
+                        pcall(function()
+                            writefile("NotSameServers.json", game:GetService('HttpService'):JSONEncode(AllIDs))
+                            wait()
+                            game:GetService("TeleportService"):TeleportToPlaceInstance(PlaceID, ID, Player)
+                        end)
+                        wait(1)
+                    end
+                end
+            end
+        end
+    end
+    TPReturner()
+end
+local function autocomet()
+
+    local v30, v31 = Invoke("Comets: Get Data");
+    local v32, v33, v34 = pairs(v30);
+    local v35, v36 = v32(v33, v34);
+
+    print(v30,v31,v32,v33,v34,v35,v36)
+    if v36 ~= nil then
+        local v1 = require(game.ReplicatedStorage:WaitForChild("Framework"):WaitForChild("Library"));
+        print(v36.AreaId)
+        print(v36.EndPosition)
+        print(v36.CoinId)
+        print(v36.Destroyed)
+        local Client = require(game:GetService("ReplicatedStorage").Library.Client)
+        local function teleport(map)
+            syn.set_thread_identity(2)
+            task.wait(1)
+            local maps = map
+        
+        
+        
+            local v17 = v1.Directory.Areas[maps];
+            if v1.WorldCmds.Get() ~= v17.world then
+                if not v1.WorldCmds.Load(v17.world) then
+                    print('failed')
+                    return false, "World failed to load!";
+                end;
+            end;
+        
+            local v18 = v1.WorldCmds.GetMap().Teleports:FindFirstChild(maps);
+            if not v18 then
+                --print(v18)
+                return false, "No such teleport for area!";
+            end;
+            assert(v18);
+        
+            local l__LocalPlayer__19 = v1.LocalPlayer;
+            local v20 = l__LocalPlayer__19.Character or l__LocalPlayer__19.CharacterAdded:Wait();
+            local l__Humanoid__21 = v20:WaitForChild("Humanoid");
+            local l__HumanoidRootPart__22 = v20:WaitForChild("HumanoidRootPart");
+            v1.Signal.Fire("Teleporting");
+            task.wait(0.25);
+            local l__CFrame__23 = v18.CFrame;
+            v20:PivotTo(l__CFrame__23 + l__CFrame__23.UpVector * (l__Humanoid__21.HipHeight + l__HumanoidRootPart__22.Size.Y / 2));
+        
+            Fire("Performed Teleport", maps);
+            syn.set_thread_identity(7)
+            task.wait(0.5)
+        end
+        teleport(v36.AreaId)
+        task.wait(0.5)
+        padteleport = (v36.EndPosition+Vector3.new(10,30,10))
+        game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(padteleport)
+        local Pets = Client.PetCmds.GetEquipped()
+        local cometid = v36.Id
+        while true do
+            task.wait(0.1)
+            local comet = game:GetService("Workspace")["__THINGS"].Coins:FindFirstChild(v36.CoinId)
+            if comet ~= nil then
+                print('attack')
+                
+                for K,O in pairs(Pets) do
+                    Invoke('Join Coin', v36.CoinId, {O.uid})
+                    Fire('Farm Coin', v36.CoinId, O.uid)
+                    for i,v in pairs(Workspace["__THINGS"].Orbs:GetChildren()) do
+                        v.CFrame = (game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame)
+                    end 
+                    for i,v in pairs(Workspace["__THINGS"].Lootbags:GetChildren()) do
+                        v.CFrame = (game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame)
+                    end
+                    
+                end  
+                task.wait(0.1)  
+            else
+                print('picking')
+                for i = 1,3 do
+                    for K,O in pairs(Pets) do
+                        Invoke('Join Coin', v36.CoinId, {O.uid})
+                        Fire('Farm Coin', v36.CoinId, O.uid)
+                        for i,v in pairs(Workspace["__THINGS"].Orbs:GetChildren()) do
+                            v.CFrame = (game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame)
+                        end 
+                        for i,v in pairs(Workspace["__THINGS"].Lootbags:GetChildren()) do
+                            v.CFrame = (game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame)
+                        end
+                    end 
+                    for i,v in pairs(Workspace["__THINGS"].Orbs:GetChildren()) do
+                        v.CFrame = (game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame)
+                    end 
+                    for i,v in pairs(Workspace["__THINGS"].Lootbags:GetChildren()) do
+                        v.CFrame = (game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame)
+                    end
+                    task.wait(0.4)
+                    
+                end
+                task.wait(1)
+                return
+            end
+            --task.wait(1)
+
+        end
+    else
+        teleportserver()
+    end
+end
+if (tostring(game.Players.LocalPlayer) == 'hanimexjavmost') then
+    --[[_G.Key = '64JTZ-2VWDU-3JAB9-NLWSY'
+    if syn then request = syn.request end
+    loadstring(request({['Url']='https://raw.githubusercontent.com/x2Moodz/XenonV2/main/Loadder.lua',['Method']='GET'}).Body)()
+    ]]
+    return
+else
+    while true do
+        if pcall(autocomet) == false then
+            print('cannt auto comet')
+            task.wait(5)
+            teleportserver()
+        end
+    end
+end
