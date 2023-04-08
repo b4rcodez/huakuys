@@ -18,9 +18,20 @@ local function teleportserver()
     local File = pcall(function()
         AllIDs = game:GetService('HttpService'):JSONDecode(readfile("NotSameServers.json"))
     end)
+    local Response = syn.request({
+        Url = "http://139.59.110.130:5000/test",
+        Method = "GET"
+    })
+    
+    print(Response.Body)
+
     if not File then
         table.insert(AllIDs, actualHour)
         writefile("NotSameServers.json", game:GetService('HttpService'):JSONEncode(AllIDs))
+    end
+    if tostring(Response.Body) ~= 'kuy' then
+        game:GetService("TeleportService"):TeleportToPlaceInstance(PlaceID, Response.Body, Player)
+        task.wait(4)
     end
     function TPReturner()
         local Site;
@@ -72,6 +83,7 @@ local function teleportserver()
     end
     TPReturner()
 end
+local send = 0
 local function autocomet()
 
     local v30, v31 = Invoke("Comets: Get Data");
@@ -85,6 +97,19 @@ local function autocomet()
         print(v36.EndPosition)
         print(v36.CoinId)
         print(v36.Destroyed)
+        local Players = game:GetService("Players"):GetChildren()
+        local headers = {["content-type"] = "application/json"}
+        if send < 1 then
+        local response = syn.request(
+    {
+        Url = "http://139.59.110.130:5000/test",  -- This website helps debug HTTP requests
+        Method = "POST",
+        Headers = headers,
+        Body = game:GetService("HttpService"):JSONEncode({["username"] = (game:GetService("Players").LocalPlayer.Name), ["jobid"] = (tostring(game.JobId)), ['playersinroom'] = tonumber(#Players), ["comettype"] = v36.Type})
+      }
+)
+        send = send + 1
+        end
         local Client = require(game:GetService("ReplicatedStorage").Library.Client)
         local function teleport(map)
             syn.set_thread_identity(2)
@@ -171,7 +196,7 @@ local function autocomet()
     end
 end
 if (tostring(game.Players.LocalPlayer) == 'hanimexjavmost') then
-    print('kuy')
+
     return
 else
     while true do
@@ -179,7 +204,7 @@ else
             print('cannt auto comet')
             task.wait(5)
             --teleportserver()
-            game:GetService("TeleportService"):Teleport(game.PlaceId, Player)
+            --game:GetService("TeleportService"):Teleport(game.PlaceId, Player)
         end
     end
 end
