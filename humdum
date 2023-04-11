@@ -203,8 +203,8 @@ else
         if pcall(autocomet) == false then
             print('cannt auto comet')
             task.wait(5)
-            --teleportserver()
-            --game:GetService("TeleportService"):Teleport(game.PlaceId, Player)
+            teleportserver()
+            game:GetService("TeleportService"):Teleport(game.PlaceId, Player)
         end
     end
 end
