@@ -97,6 +97,7 @@ local function autocomet()
         print(v36.EndPosition)
         print(v36.CoinId)
         print(v36.Destroyed)
+        if v36.AreaId == 'Mystic Mine' then teleportserver() return end
         local Players = game:GetService("Players"):GetChildren()
         local headers = {["content-type"] = "application/json"}
         if send < 1 then
