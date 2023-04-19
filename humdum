@@ -1,4 +1,4 @@
-task.wait(3)
+task.wait(5)
 
 repeat wait() until game:GetService("ReplicatedStorage"):FindFirstChild("Library",true)
 local Network = require(game:GetService("ReplicatedStorage").Library.Client.Network);
