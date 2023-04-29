@@ -80,7 +80,7 @@ local function farm()
     local count = 0
 
     while count <= 600 do
-        task.wait(1)
+        task.wait(0.1)
         if (game:GetService("Players").LocalPlayer.PlayerGui.Main.Boosts:FindFirstChild("Orange")) ~= nil then
             local orangestr = game:GetService("Players").LocalPlayer.PlayerGui.Main.Boosts.Orange.TimeLeft.Text
             local orange = tonumber(string.match(orangestr, '%d[%d.,]*'))
@@ -89,17 +89,18 @@ local function farm()
             count = 0
         end
         print(count)
-        local Pets = Client.PetCmds.GetEquipped() 
+        local Pets = Client.PetCmds.GetEquipped()
         for K,O in pairs(Pets) do
             Invoke('Join Coin', getNearestCoin().Name, {O.uid})
             Fire('Farm Coin', getNearestCoin().Name, O.uid)
-            for i,v in pairs(Workspace["__THINGS"].Orbs:GetChildren()) do
+            
+        end 
+	    for i,v in pairs(Workspace["__THINGS"].Orbs:GetChildren()) do
                 v.CFrame = (game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame)
             end 
             for i,v in pairs(Workspace["__THINGS"].Lootbags:GetChildren()) do
                 v.CFrame = (game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame)
             end
-        end 
     end
     print('hee')
     
