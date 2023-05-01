@@ -98,9 +98,11 @@ for K,O in pairs(Pets) do
             count = 0
         end
         print(count)
-        Invoke('Join Coin', getNearestCoin().Name, petsname)
+        a = getNearestCoin().Name
+        
+	Invoke('Join Coin', a, petsname)
         for K,O in pairs(Pets) do
-        Fire('Farm Coin', getNearestCoin().Name, O.uid)
+        Fire('Farm Coin', a, O.uid)
         end
         --Fire('Farm Coin', getNearestCoin().Name,petsname)
 	    for i,v in pairs(Workspace["__THINGS"].Orbs:GetChildren()) do
