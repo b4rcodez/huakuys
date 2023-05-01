@@ -67,6 +67,7 @@ local function teleport()
             task.wait(0.5)
         end
         teleport("Mystic Mine")
+        task.wait(2)
         padteleport = (game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position+Vector3.new(5,30,-340))
         game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(padteleport)
         task.wait(2)
@@ -78,7 +79,15 @@ local function farm()
     until (#Workspace["__THINGS"].Coins:GetChildren() > 0)
     teleport()
     local count = 0
-
+    local petsname = {}
+    local Pets = Client.PetCmds.GetEquipped()
+    
+for K,O in pairs(Pets) do
+        petsname[K] = O.uid
+        --Invoke('Join Coin', getNearestCoin().Name, {O.uid})
+        --Fire('Farm Coin', getNearestCoin().Name, O.uid)
+            
+    end 
     while count <= 600 do
         task.wait(0.1)
         if (game:GetService("Players").LocalPlayer.PlayerGui.Main.Boosts:FindFirstChild("Orange")) ~= nil then
@@ -89,12 +98,11 @@ local function farm()
             count = 0
         end
         print(count)
-        local Pets = Client.PetCmds.GetEquipped()
+        Invoke('Join Coin', getNearestCoin().Name, petsname)
         for K,O in pairs(Pets) do
-            Invoke('Join Coin', getNearestCoin().Name, {O.uid})
-            Fire('Farm Coin', getNearestCoin().Name, O.uid)
-            
-        end 
+        Fire('Farm Coin', getNearestCoin().Name, O.uid)
+        end
+        --Fire('Farm Coin', getNearestCoin().Name,petsname)
 	    for i,v in pairs(Workspace["__THINGS"].Orbs:GetChildren()) do
                 v.CFrame = (game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame)
             end 
