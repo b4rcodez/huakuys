@@ -41,8 +41,8 @@ local function teleportserver()
             Site = game.HttpService:JSONDecode(game:HttpGet('https://games.roblox.com/v1/games/' .. PlaceID .. '/servers/Public?sortOrder=Asc&limit=100&cursor=' .. foundAnything))
         end
         local ID = ""
-        if Site.nextPageCursor and Site.nextPageCursor ~= "null" and Site.nextPageCursor ~= nil then
-            foundAnything = Site.nextPageCursor
+        if Site.previousPageCursor and Site.previousPageCursor ~= "null" and Site.previousPageCursor ~= nil then
+            foundAnything = Site.previousPageCursor
         end
         local num = 0;
         for i,v in pairs(Site.data) do
@@ -153,31 +153,36 @@ local function autocomet()
         task.wait(0.5)
         padteleport = (v36.EndPosition+Vector3.new(0,30,0))
         game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(padteleport)
+        petsname = {}
         local Pets = Client.PetCmds.GetEquipped()
         local cometid = v36.Id
+        for K,O in pairs(Pets) do
+            petsname[K] = O.uid
+        end
         while true do
             task.wait(0.1)
             local comet = game:GetService("Workspace")["__THINGS"].Coins:FindFirstChild(v36.CoinId)
+            local bagdiamond = (#Workspace["__THINGS"].Orbs:GetChildren())
+            local lootbagdm = (#Workspace["__THINGS"].Lootbags:GetChildren())
+            print('lootbag = '..bagdiamond..lootbagdm)
             if comet ~= nil then
                 print('attack')
-                
+                Invoke('Join Coin', v36.CoinId, petsname)
                 for K,O in pairs(Pets) do
-                    Invoke('Join Coin', v36.CoinId, {O.uid})
                     Fire('Farm Coin', v36.CoinId, O.uid)
-                    for i,v in pairs(Workspace["__THINGS"].Orbs:GetChildren()) do
-                        v.CFrame = (game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame)
-                    end 
-                    for i,v in pairs(Workspace["__THINGS"].Lootbags:GetChildren()) do
-                        v.CFrame = (game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame)
-                    end
-                    
-                end  
+                end
+                for i,v in pairs(Workspace["__THINGS"].Orbs:GetChildren()) do
+                    v.CFrame = (game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame)
+                end
+                for i,v in pairs(Workspace["__THINGS"].Lootbags:GetChildren()) do
+                    v.CFrame = (game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame)
+                end 
                 task.wait(0.1)  
-            else
-                print('picking')
-                for i = 1,7 do
+            elseif  bagdiamond > 0 or lootbagdm > 0 then
+                
+                for i = 1,10 do
+                    Invoke('Join Coin', v36.CoinId, petsname)
                     for K,O in pairs(Pets) do
-                        Invoke('Join Coin', v36.CoinId, {O.uid})
                         Fire('Farm Coin', v36.CoinId, O.uid)
                     end 
                     for i,v in pairs(Workspace["__THINGS"].Orbs:GetChildren()) do
@@ -186,7 +191,23 @@ local function autocomet()
                     for i,v in pairs(Workspace["__THINGS"].Lootbags:GetChildren()) do
                         v.CFrame = (game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame)
                     end
-                    task.wait(0.5)
+                    task.wait(0.7)
+                    
+                end
+            else
+                print('picking')
+                for i = 1,10 do
+                    Invoke('Join Coin', v36.CoinId, petsname)
+                    for K,O in pairs(Pets) do
+                        Fire('Farm Coin', v36.CoinId, O.uid)
+                    end 
+                    for i,v in pairs(Workspace["__THINGS"].Orbs:GetChildren()) do
+                        v.CFrame = (game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame)
+                    end 
+                    for i,v in pairs(Workspace["__THINGS"].Lootbags:GetChildren()) do
+                        v.CFrame = (game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame)
+                    end
+                    task.wait(0.7)
                     
                 end
                 pickingcount = pickingcount + 1
@@ -204,8 +225,10 @@ local function autocomet()
     end
 end
 if (tostring(game.Players.LocalPlayer) == 'hanimexjavmost') or (tostring(game.Players.LocalPlayer) == 'FullPremierSusu68ss') or (tostring(game.Players.LocalPlayer) == 'FullPremierSusu71ss') then
+
     return
 elseif (tostring(game.Players.LocalPlayer) == 'FullPremierSusu101ss') or (tostring(game.Players.LocalPlayer) == 'FullPremierSusu102ss') then
+
     return
 else
     while true do
