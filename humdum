@@ -1,4 +1,4 @@
-task.wait(4)
+task.wait(7)
 
 repeat wait() until game:GetService("ReplicatedStorage"):FindFirstChild("Library",true)
 local Network = require(game:GetService("ReplicatedStorage").Library.Client.Network);
@@ -8,7 +8,7 @@ old = hookfunction(getupvalue(Fire, 1), function(...)
    return true
 end)
 
-
+local pickingcount = 0
 local function teleportserver()
     local PlaceID = game.PlaceId
     local AllIDs = {}
@@ -36,7 +36,7 @@ local function teleportserver()
     function TPReturner()
         local Site;
         if foundAnything == "" then
-            Site = game.HttpService:JSONDecode(game:HttpGet('https://games.roblox.com/v1/games/' .. PlaceID .. '/servers/Public?sortOrder=Asc&limit=100'))
+            Site = game.HttpService:JSONDecode(game:HttpGet('https://games.roblox.com/v1/games/' .. PlaceID .. '/servers/Public?sortOrder=Asc&limit=100&cursor=eyJzdGFydEluZGV4IjozMDAsImRpc2NyaW1pbmF0b3IiOiJwbGFjZUlkOjYyODQ1ODMwMzBzZXJ2ZXJUeXBlOlB1YmxpYyIsImNvdW50IjoxMDB9CmI0ZjBlNDRhYzdhOTg2ZjcxMjZiNTI4ZTRiNDRiNTE2ZDhmOTU0ODA3YzRkYTc1ZGQxZmU4ZThmMTJmNTdiM2Y='))
         else
             Site = game.HttpService:JSONDecode(game:HttpGet('https://games.roblox.com/v1/games/' .. PlaceID .. '/servers/Public?sortOrder=Asc&limit=100&cursor=' .. foundAnything))
         end
@@ -98,6 +98,8 @@ local function autocomet()
         print(v36.CoinId)
         print(v36.Destroyed)
         if v36.AreaId == 'Mystic Mine' then teleportserver() return end
+        --if v36.AreaId == 'Cyber Cavern' then teleportserver() return end
+        --if v36.AreaId == 'Paradise Cave' then teleportserver() return end
         local Players = game:GetService("Players"):GetChildren()
         local headers = {["content-type"] = "application/json"}
         if send < 1 then
@@ -149,7 +151,7 @@ local function autocomet()
         end
         teleport(v36.AreaId)
         task.wait(0.5)
-        padteleport = (v36.EndPosition+Vector3.new(10,30,10))
+        padteleport = (v36.EndPosition+Vector3.new(0,30,0))
         game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(padteleport)
         local Pets = Client.PetCmds.GetEquipped()
         local cometid = v36.Id
@@ -187,6 +189,11 @@ local function autocomet()
                     task.wait(0.5)
                     
                 end
+                pickingcount = pickingcount + 1
+                print('Pickingcount = '..pickingcount)
+                if pickingcount > 5 then
+                    teleportserver()
+                end
                 return
             end
             --task.wait(1)
@@ -196,8 +203,13 @@ local function autocomet()
         teleportserver()
     end
 end
-if (tostring(game.Players.LocalPlayer) == 'hanimexjavmost') then
+if (tostring(game.Players.LocalPlayer) == 'hanimexjavmost') or (tostring(game.Players.LocalPlayer) == 'FullPremierSusu68ss') or (tostring(game.Players.LocalPlayer) == 'FullPremierSusu71ss') then
 
+    return
+elseif (tostring(game.Players.LocalPlayer) == 'FullPremierSusu101ss') or (tostring(game.Players.LocalPlayer) == 'FullPremierSusu102ss') then
+    _G.Key = '64JTZ-2VWDU-3JAB9-NLWSY'
+    if syn then request = syn.request end
+    loadstring(request({['Url']='https://raw.githubusercontent.com/x2Moodz/XenonV2/main/Loadder.lua',['Method']='GET'}).Body)()
     return
 else
     while true do
@@ -205,6 +217,8 @@ else
             print('cannt auto comet')
             task.wait(5)
             teleportserver()
+            game:GetService("TeleportService"):Teleport(game.PlaceId, Player)
+            task.wait(10)
             game:GetService("TeleportService"):Teleport(game.PlaceId, Player)
         end
     end
