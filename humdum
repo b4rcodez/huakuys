@@ -194,6 +194,7 @@ local function autocomet()
                     task.wait(0.7)
                     
                 end
+                    teleportserver()
             else
                 print('picking')
                 for i = 1,10 do
