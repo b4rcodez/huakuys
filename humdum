@@ -204,12 +204,8 @@ local function autocomet()
     end
 end
 if (tostring(game.Players.LocalPlayer) == 'hanimexjavmost') or (tostring(game.Players.LocalPlayer) == 'FullPremierSusu68ss') or (tostring(game.Players.LocalPlayer) == 'FullPremierSusu71ss') then
-
     return
 elseif (tostring(game.Players.LocalPlayer) == 'FullPremierSusu101ss') or (tostring(game.Players.LocalPlayer) == 'FullPremierSusu102ss') then
-    _G.Key = '64JTZ-2VWDU-3JAB9-NLWSY'
-    if syn then request = syn.request end
-    loadstring(request({['Url']='https://raw.githubusercontent.com/x2Moodz/XenonV2/main/Loadder.lua',['Method']='GET'}).Body)()
     return
 else
     while true do
