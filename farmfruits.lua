@@ -66,8 +66,8 @@ local function teleport()
             task.wait(0.5)
         end
         teleport("Pixel Vault")
-        padteleport = (game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position+Vector3.new(-205,30,0))
-        --game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(padteleport)
+        padteleport = (game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position+Vector3.new(-50,30,0))
+	game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(padteleport)
         task.wait(5)
 end
 local function farm()
