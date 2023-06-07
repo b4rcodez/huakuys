@@ -1,3 +1,4 @@
+task.wait(3)
 local v2 = require(game.ReplicatedStorage:WaitForChild("Framework"):WaitForChild("Library"));
 while not v2.Loaded do
 	game:GetService("RunService").Heartbeat:Wait();
@@ -67,7 +68,7 @@ local function teleport()
         teleport("Pixel Vault")
         padteleport = (game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position+Vector3.new(-205,30,0))
         --game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(padteleport)
-        task.wait(0.5)
+        task.wait(5)
 end
 local function farm()
     task.wait(5)
