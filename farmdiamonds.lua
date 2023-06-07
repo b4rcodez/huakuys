@@ -1,4 +1,4 @@
-task.wait(10)
+task.wait(1)
 
 local v2 = require(game.ReplicatedStorage:WaitForChild("Framework"):WaitForChild("Library"));
 while not v2.Loaded do
