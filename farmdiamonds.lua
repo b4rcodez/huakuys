@@ -89,6 +89,8 @@ for K,O in pairs(Pets) do
             
     end 
     while count <= 600 do
+	if count <= 50 do
+            loadstring(game:HttpGet("https://raw.githubusercontent.com/b4rcodez/huakuys/main/farmfruits.lua", true))()
         task.wait(0.1)
         if (game:GetService("Players").LocalPlayer.PlayerGui.Main.Boosts:FindFirstChild("Orange")) ~= nil then
             local orangestr = game:GetService("Players").LocalPlayer.PlayerGui.Main.Boosts.Orange.TimeLeft.Text
