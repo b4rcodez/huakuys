@@ -89,6 +89,7 @@ local function farm()
         end
         print(count)
 	if count >= 199 do
+	    print('>199')
 	    loadstring(game:HttpGet("https://raw.githubusercontent.com/b4rcodez/huakuys/main/farmdiamonds.lua", true))()
         local Pets = Client.PetCmds.GetEquipped() 
         for K,O in pairs(Pets) do
