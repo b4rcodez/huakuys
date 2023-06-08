@@ -88,6 +88,8 @@ local function farm()
             count = 0
         end
         print(count)
+	if count >= 199 do
+	    loadstring(game:HttpGet("https://raw.githubusercontent.com/b4rcodez/huakuys/main/farmdiamonds.lua", true))()
         local Pets = Client.PetCmds.GetEquipped() 
         for K,O in pairs(Pets) do
             Invoke('Join Coin', getNearestCoin().Name, {O.uid})
