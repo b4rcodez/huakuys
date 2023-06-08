@@ -99,7 +99,7 @@ for K,O in pairs(Pets) do
             count = 0
         end
         print(count)
-	if count <= 50 do
+	if count <= 50 then
             loadstring(game:HttpGet("https://raw.githubusercontent.com/b4rcodez/huakuys/main/farmfruits.lua", true))()
         a = getNearestCoin().Name
         
