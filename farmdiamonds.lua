@@ -68,7 +68,7 @@ local function teleport()
         end
         teleport("Mystic Mine")
         task.wait(2)
-        padteleport = (game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position+Vector3.new(5,30,-340))
+        padteleport = (game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position+Vector3.new(100,30,-370))
         game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(padteleport)
         task.wait(2)
 end
