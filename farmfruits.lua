@@ -67,7 +67,7 @@ local function teleport()
         end
         teleport("Pixel Vault")
         task.wait(2)
-        while v1.WorldCmds.Get() ~= 'Pixel World' do
+        while v1.WorldCmds.Get() ~= 'Pixel' do
             teleport("Pixel Vault")
             task.wait(2)
         end
