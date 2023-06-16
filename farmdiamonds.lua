@@ -66,10 +66,10 @@ local function teleport()
             setthreadcontext(7)
             task.wait(0.5)
         end
-        teleport("Diamond Mine")
+        teleport("Mystic Mine")
         task.wait(2)
         while v1.WorldCmds.Get() ~= 'Diamond Mine' do
-            teleport("Diamond Mine")
+            teleport("Mystic Mine")
             task.wait(2)
         end
 	padteleport = (game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position+Vector3.new(5,30,-340))
