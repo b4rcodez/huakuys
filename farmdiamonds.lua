@@ -70,7 +70,7 @@ local function teleport()
         task.wait(2)
         while v1.WorldCmds.Get() ~= 'Diamond Mine' do
             teleport("Mystic Mine")
-            task.wait(2)
+            task.wait(10)
         end
 	padteleport = (game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position+Vector3.new(5,30,-340))
         game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(padteleport)
