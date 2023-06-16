@@ -67,7 +67,7 @@ local function teleport()
         end
         teleport("Pixel Vault")
         padteleport = (game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position+Vector3.new(-50,30,0))
-	game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(padteleport)
+	game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(3447.51, 10, 2560) * CFrame.fromEulerAnglesXYZ(math.rad(45), 30, 0)
         task.wait(5)
 end
 local function farm()
