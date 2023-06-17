@@ -66,8 +66,7 @@ local function teleport()
             setthreadcontext(7)
             task.wait(0.5)
         end
-        teleport("Mystic Mine")
-        task.wait(2)
+	task.wait(1)
         while v1.WorldCmds.Get() ~= 'Diamond Mine' do
             teleport("Mystic Mine")
             task.wait(10)
