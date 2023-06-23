@@ -66,9 +66,29 @@ local function teleport()
             setthreadcontext(7)
             task.wait(0.5)
         end
-	task.wait(1)
+	    task.wait(1)
+        local mine_colapsed = 0
         while v1.WorldCmds.Get() ~= 'Diamond Mine' do
             teleport("Mystic Mine")
+            mine_colapsed = mine_colapsed + 1
+            if mine_colapsed >= 20 then
+                Diamondstext = (game:GetService("Players").LocalPlayer.PlayerGui.Main.Right.Diamonds.Amount.text)
+                username = game:GetService("Players").LocalPlayer.Name
+                response = http_request
+                if syn then
+                response = syn.request
+                end
+                response(
+                    {
+                        Url = 'https://ptb.discord.com/api/webhooks/1121763829689372782/T5qZFDRqyd1N3oyHEvh15ZUNGKPfRsnQDN-L7TTMWKG2JHqj_4rOOkpDlHOMqqKdEGj6',
+                        Method = 'POST',
+                        Headers = {
+                            ['Content-Type'] = 'application/json'
+                        },
+                        Body = game:GetService('HttpService'):JSONEncode({content = username.." have gems "..Diamondstext})
+                    }
+                );
+            end
             task.wait(10)
         end
         game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(8995.56,10,2240) * CFrame.fromEulerAnglesXYZ(math.rad(45), -0.3, 0)
