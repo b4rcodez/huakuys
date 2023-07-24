@@ -71,7 +71,11 @@ local function teleport()
 	    task.wait(1)
         local mine_colapsed = 0
         while v1.WorldCmds.Get() ~= 'Diamond Mine' do
-            teleport("Mystic Mine")
+            RunService:Set3dRenderingEnabled(true)
+	    task.wait(2)
+	    teleport("Mystic Mine")
+	    task.wait(2)
+	    RunService:Set3dRenderingEnabled(false)
             print('mine_colapsed = '.. mine_colapsed)
             mine_colapsed = mine_colapsed + 1
             if mine_colapsed >= 20 then
