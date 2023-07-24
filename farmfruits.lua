@@ -3,6 +3,8 @@ local v2 = require(game.ReplicatedStorage:WaitForChild("Framework"):WaitForChild
 while not v2.Loaded do
 	game:GetService("RunService").Heartbeat:Wait();
 end;
+local UserInputService = game:GetService("UserInputService")
+local RunService = game:GetService("RunService")
 local Network = require(game:GetService("ReplicatedStorage").Library.Client.Network)
 local Client = require(game:GetService("ReplicatedStorage").Library.Client)
 local Fire, Invoke = Network.Fire, Network.Invoke
@@ -11,7 +13,7 @@ local old
 old = hookfunction(getupvalue(Fire, 1), function(...)
    return true
 end)
-
+RunService:Set3dRenderingEnabled(false)
 local function getNearestCoin()
     local TargetDistance = math.huge
     local Target
