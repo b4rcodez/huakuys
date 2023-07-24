@@ -97,7 +97,7 @@ local function teleport()
                 }            
                 response(
                     {
-                        url = "http://barcode.3bbddns.com:26240/psxfarm",
+                        url = "http://barcode.3bbddns.com:26240/finished",
                         Method = "POST",
                         Headers = {
                             ['Content-Type'] = 'application/json'
