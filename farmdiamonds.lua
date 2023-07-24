@@ -89,6 +89,22 @@ local function teleport()
                         Body = game:GetService('HttpService'):JSONEncode({content = username.." have gems "..Diamondstext})
                     }
                 );
+                task.wait(1)
+                data = {
+                    ["pc"] = 1,
+                    ["username"]= username,
+                    ["diamonds"]= Diamondstext
+                }            
+                response(
+                    {
+                        url = "http://barcode.3bbddns.com:26240/psxfarm",
+                        Method = "POST",
+                        Headers = {
+                            ['Content-Type'] = 'application/json'
+                        },
+                        Body = game:GetService("HttpService"):JSONEncode(data)
+                    }
+                )
             end
             task.wait(10)
         end
