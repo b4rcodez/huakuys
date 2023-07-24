@@ -67,12 +67,15 @@ local function teleport()
             setthreadcontext(7)
             task.wait(0.5)
         end
-        teleport("Pixel Vault")
+        RunService:Set3dRenderingEnabled(true)
+	task.wait(2)
+	teleport("Pixel Vault")
         task.wait(2)
         while v1.WorldCmds.Get() ~= 'Pixel' do
             teleport("Pixel Vault")
             task.wait(2)
         end
+	RunService:Set3dRenderingEnabled(false)
         padteleport = (game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position+Vector3.new(-50,30,0))
 	game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(3447.51, 10, 2560) * CFrame.fromEulerAnglesXYZ(math.rad(45), 30, 0)
         task.wait(5)
