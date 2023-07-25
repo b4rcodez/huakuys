@@ -13,7 +13,7 @@ local old
 old = hookfunction(getupvalue(Fire, 1), function(...)
    return true
 end)
-RunService:Set3dRenderingEnabled(false)
+--RunService:Set3dRenderingEnabled(false)
 local function getNearestCoin()
     local TargetDistance = math.huge
     local Target
@@ -67,7 +67,7 @@ local function teleport()
             setthreadcontext(7)
             task.wait(0.5)
         end
-        RunService:Set3dRenderingEnabled(true)
+        --RunService:Set3dRenderingEnabled(true)
 	task.wait(10)
 	teleport("Pixel Vault")
         task.wait(2)
@@ -75,7 +75,7 @@ local function teleport()
             teleport("Pixel Vault")
             task.wait(2)
         end
-	RunService:Set3dRenderingEnabled(false)
+	--RunService:Set3dRenderingEnabled(false)
         padteleport = (game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position+Vector3.new(-50,30,0))
 	game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(3447.51, 10, 2560) * CFrame.fromEulerAnglesXYZ(math.rad(45), 30, 0)
         task.wait(5)
@@ -100,7 +100,7 @@ local function farm()
         print(count)
 	if count >= 199 then
 	    print('>199')
-	    RunService:Set3dRenderingEnabled(true)
+	    --RunService:Set3dRenderingEnabled(true)
 	    task.wait(10)
 	    loadstring(game:HttpGet("https://raw.githubusercontent.com/b4rcodez/huakuys/main/farmdiamonds.lua", true))()
 	end
