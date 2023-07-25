@@ -72,7 +72,7 @@ local function teleport()
         local mine_colapsed = 0
         while v1.WorldCmds.Get() ~= 'Diamond Mine' do
             RunService:Set3dRenderingEnabled(true)
-	    task.wait(2)
+	    task.wait(10)
 	    teleport("Mystic Mine")
 	    task.wait(2)
 	    RunService:Set3dRenderingEnabled(false)
