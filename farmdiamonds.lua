@@ -145,6 +145,8 @@ for K,O in pairs(Pets) do
         end
         print(count)
 	if count <= 50 then
+	    RunService:Set3dRenderingEnabled(true)
+	    task.wait(10)
             loadstring(game:HttpGet("https://raw.githubusercontent.com/b4rcodez/huakuys/main/farmfruits.lua", true))()
 	end
         a = getNearestCoin().Name
