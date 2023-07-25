@@ -68,7 +68,7 @@ local function teleport()
             task.wait(0.5)
         end
         RunService:Set3dRenderingEnabled(true)
-	task.wait(2)
+	task.wait(10)
 	teleport("Pixel Vault")
         task.wait(2)
         while v1.WorldCmds.Get() ~= 'Pixel' do
@@ -100,6 +100,8 @@ local function farm()
         print(count)
 	if count >= 199 then
 	    print('>199')
+	    RunService:Set3dRenderingEnabled(true)
+	    task.wait(10)
 	    loadstring(game:HttpGet("https://raw.githubusercontent.com/b4rcodez/huakuys/main/farmdiamonds.lua", true))()
 	end
         local Pets = Client.PetCmds.GetEquipped() 
