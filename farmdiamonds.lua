@@ -14,7 +14,7 @@ local old
 old = hookfunction(getupvalue(Fire, 1), function(...)
    return true
 end)
-RunService:Set3dRenderingEnabled(false)
+--RunService:Set3dRenderingEnabled(false)
 local function getNearestCoin()
     local TargetDistance = math.huge
     local Target
@@ -71,11 +71,11 @@ local function teleport()
 	    task.wait(1)
         local mine_colapsed = 0
         while v1.WorldCmds.Get() ~= 'Diamond Mine' do
-            RunService:Set3dRenderingEnabled(true)
+            --RunService:Set3dRenderingEnabled(true)
 	    task.wait(10)
 	    teleport("Mystic Mine")
 	    task.wait(2)
-	    RunService:Set3dRenderingEnabled(false)
+	    --RunService:Set3dRenderingEnabled(false)
             print('mine_colapsed = '.. mine_colapsed)
             mine_colapsed = mine_colapsed + 1
             if mine_colapsed >= 20 then
@@ -145,7 +145,7 @@ for K,O in pairs(Pets) do
         end
         print(count)
 	if count <= 50 then
-	    RunService:Set3dRenderingEnabled(true)
+	    --RunService:Set3dRenderingEnabled(true)
 	    task.wait(10)
             loadstring(game:HttpGet("https://raw.githubusercontent.com/b4rcodez/huakuys/main/farmfruits.lua", true))()
 	end
